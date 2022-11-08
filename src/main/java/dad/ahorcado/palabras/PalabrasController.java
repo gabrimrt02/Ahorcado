@@ -36,7 +36,8 @@ public class PalabrasController implements Initializable{
 
     @FXML
     private Button quitarButton;
-
+    
+    // CONSTRUCTOR
     public PalabrasController() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/palabrasView.fxml"));
@@ -69,7 +70,7 @@ public class PalabrasController implements Initializable{
         dialogo.setContentText("Nueva palabra:");
 
         Optional<String> result = dialogo.showAndWait();
-        result.ifPresent(palabra -> palabrasList.getItems().add(palabra));
+        result.ifPresent(palabra -> palabrasList.getItems().add(palabra.toUpperCase()));
 
         System.out.println(getPalabras());
 
@@ -92,6 +93,10 @@ public class PalabrasController implements Initializable{
         }
 
         return palabrasArray;
+    }
+
+    public ListProperty<String> palabrasProperty() {
+        return palabras;
     }
 
 }

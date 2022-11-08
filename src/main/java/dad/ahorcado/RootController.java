@@ -7,6 +7,10 @@ import java.util.ResourceBundle;
 import dad.ahorcado.palabras.PalabrasController;
 import dad.ahorcado.partida.PartidaController;
 import dad.ahorcado.puntuaciones.PuntuacionesController;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +27,8 @@ public class RootController implements Initializable{
     
     // MODEL
 
+    private ListProperty<String> palabras = new SimpleListProperty<>();
+    private StringProperty palabraOculta = new SimpleStringProperty();
 
     // VIEW
     
@@ -61,6 +67,8 @@ public class RootController implements Initializable{
         puntuacionesTab.setContent(puntuacionesController.getView());
 
         // BINDINGS
+        palabras.bind(palabrasController.palabrasProperty());
+        partidaController.palabraOcultaProperty().bind(palabraOculta);
         
     }
 
@@ -68,4 +76,11 @@ public class RootController implements Initializable{
         return view;
     }
     
+    public ListProperty<String> palabrasProperty() {
+        return palabras;
+    }
+
+    public void setPalabraOculta(String text) {
+        palabraOculta.set(text);;
+    }
 }

@@ -4,17 +4,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 public class PartidaController implements Initializable {
+
+    // MODEL
+    private StringProperty palabraOculta = new SimpleStringProperty();
     
     // VIEW
     @FXML
@@ -27,19 +32,21 @@ public class PartidaController implements Initializable {
     private Button letraButton;
 
     @FXML
-    private Text letrasUsadasText;
+    private Label letrasUsadasLabel;
 
     @FXML
-    private Text palabraOcultaText;
+    private Label palabraOcultaLabel;
 
     @FXML
-    private Text puntosText;
+    private Label puntosLabel;
 
     @FXML
     private Button resolverButton;
 
     @FXML
     private BorderPane view;
+
+    
 
     // CONSTRUCTOR
     public PartidaController() {
@@ -56,8 +63,12 @@ public class PartidaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
+        // TODO IMPLEMENTAR INITIALIZE DE PARTIDACONTROLLER
         
+        // BINDINGS
+
+
+        ocultarLetras();
     }
 
     public BorderPane getView() {
@@ -65,13 +76,31 @@ public class PartidaController implements Initializable {
     }
 
     @FXML
-    private void onAdivinarLetraButton(ActionEvent e) {
+    private void onAdivinarLetraButton(ActionEvent event) {
 
     }
 
     @FXML
-    private void onResolverButton(ActionEvent e) {
+    private void onResolverButton(ActionEvent event) {
 
     }
+
+    public StringProperty palabraOcultaProperty() {
+        return palabraOculta;
+    }
+
+    public void ocultarLetras() {
+        
+        String oculto = "";
+        String prueba = "HOLAMUNDO";
+
+        for(int index = 0; index < prueba.length(); index++) {
+            oculto += "_ ";
+        }
+
+        palabraOcultaLabel.setText(oculto);
+
+    }
+
 
 }
