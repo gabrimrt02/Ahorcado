@@ -22,26 +22,27 @@ public class App extends Application{
     public void init() throws Exception {
         rootController = new RootController();
 
-        BufferedReader br = new BufferedReader(new FileReader(FICHERO_PALABRAS));
-        String linea = br.readLine();
+        BufferedReader brPalabras = new BufferedReader(new FileReader(FICHERO_PALABRAS));
+        String linea = brPalabras.readLine();
         
         if(linea != null) {
             ArrayList<String> palabras = new ArrayList<>();
 
             while(linea != null) {
                 palabras.add(linea.trim());
-                linea = br.readLine();
+                linea = brPalabras.readLine();
             }            
             rootController.palabrasProperty().addAll(palabras);
 
             rootController.setPalabraOculta(palabras.get(new Random().nextInt(palabras.size())));
         }
-        br.close();
+        brPalabras.close();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         
+        rootController.ocultarLetras(rootController.getPalabraOculta());
 
         primaryStage.setTitle("Ahorcado");
         primaryStage.setScene(new Scene(rootController.getView()));
@@ -53,15 +54,15 @@ public class App extends Application{
     @Override
     public void stop() throws Exception {
 
-        FileWriter fw = new FileWriter(FICHERO_PALABRAS);
+        FileWriter fwPalabras = new FileWriter(FICHERO_PALABRAS);
 
         Object[] palabras = rootController.palabrasProperty().toArray();
 
         for(Object s : palabras) {
-            fw.write(s.toString() + "\n");
+            fwPalabras.write(s.toString() + "\n");
         }
 
-        fw.close();
+        fwPalabras.close();
     }
 
     public static void main(String[] args) {

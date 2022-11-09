@@ -2,6 +2,7 @@ package dad.ahorcado;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import dad.ahorcado.palabras.PalabrasController;
@@ -27,7 +28,7 @@ public class RootController implements Initializable{
     
     // MODEL
 
-    private ListProperty<String> palabras = new SimpleListProperty<>();
+    private static ListProperty<String> palabras = new SimpleListProperty<>();
     private StringProperty palabraOculta = new SimpleStringProperty();
 
     // VIEW
@@ -69,7 +70,7 @@ public class RootController implements Initializable{
         // BINDINGS
         palabras.bind(palabrasController.palabrasProperty());
         partidaController.palabraOcultaProperty().bind(palabraOculta);
-        
+
     }
 
     public TabPane getView() {
@@ -82,5 +83,17 @@ public class RootController implements Initializable{
 
     public void setPalabraOculta(String text) {
         palabraOculta.set(text);;
+    }
+
+    public String getPalabraOculta() {
+        return palabraOculta.get();
+    }
+
+    public void ocultarLetras(String palabra) {
+        partidaController.ocultarLetras(palabra);
+    }
+
+    public static String nuevaPalabra() {
+        return palabras.get(new Random().nextInt(palabras.size()));
     }
 }
