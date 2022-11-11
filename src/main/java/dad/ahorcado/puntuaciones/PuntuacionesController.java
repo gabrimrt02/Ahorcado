@@ -14,13 +14,13 @@ import javafx.scene.layout.BorderPane;
 public class PuntuacionesController implements Initializable {
     
     @FXML
-    private TableColumn<?, ?> nombreColumn;
+    private TableColumn<Puntuacion, String> nombreColumn;
 
     @FXML
-    private TableColumn<?, ?> puntuacionColumn;
+    private TableColumn<Puntuacion, Number> puntuacionColumn;
 
     @FXML
-    private TableView<?> tabla;
+    private TableView<Puntuacion> tabla;
 
     @FXML
     private BorderPane view;

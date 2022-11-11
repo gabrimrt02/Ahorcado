@@ -70,6 +70,8 @@ public class RootController implements Initializable{
         // BINDINGS
         palabras.bind(palabrasController.palabrasProperty());
         partidaController.palabraOcultaProperty().bind(palabraOculta);
+        Logica.palabraOcultaProperty().bindBidirectional(palabraOculta);
+        Logica.palabrasProperty().bind(palabras);
 
     }
 
